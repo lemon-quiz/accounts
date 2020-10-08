@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    build: ./box/nginx
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 5000:80
+    links:
+      - db
+      - app
+      - redis
+  app:
+    build: ./box/php
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    links:
+      - db
+      - redis
+    extra_hosts:
+      - "docker.for.linux.localhost:172.17.0.1"
+  db:
+    image: percona
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: root
+    ports:
+      - 3400:3306
+  redis:
+    image: redis
