@@ -36,7 +36,7 @@ class AuthController extends Controller
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => '2',
-                'client_secret' => '2PfmZnJGgk1cwWA2uSVIdWhmr63FXOnkXHHpHYas',
+                'client_secret' => 'MCYCtcU85efcRJZgu72JEvnwk6hSTvbFHizpf7Un',
                 'username' => $request->get('username'),
                 'password' => $request->get('password'),
                 'scope' => '',
@@ -48,9 +48,13 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
-        return response()->json($request->user())
+        /** @var User $user */
+        $user = $request->user();
+        $user->load('roles');
+
+        return response()->json($user)
             ->header('X_OAUTH_CLIENT_ID', $request->get('X_OAUTH_CLIENT_ID'))
-            ->header('X_OAUTH_USER_ID', $request->get('X_OAUTH_USER_ID'))
-            ->send();
+            ->header('X_OAUTH_USER_ID', $request->get('X_OAUTH_USER_ID'));
+
     }
 }

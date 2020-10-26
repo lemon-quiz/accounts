@@ -18,6 +18,7 @@ services:
     links:
       - db
       - redis
+      - "rabbitmq:rabbitmq.local"
     extra_hosts:
       - "docker.for.linux.localhost:172.17.0.1"
   db:
@@ -31,3 +32,8 @@ services:
       - 3400:3306
   redis:
     image: redis
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    ports:
+      - 5672:5672
+      - 15672:15672

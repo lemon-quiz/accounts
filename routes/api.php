@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AccountsController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
-Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('service')
-    ->get('/profile', [\App\Http\Controllers\Api\AuthController::class, 'profile']);
+    ->get('/profile', [AuthController::class, 'profile']);
 
+Route::group(['middleware' => 'service'], function () {
+    Route::get('/accounts', [AccountsController::class, 'index']);
+    Route::post('/accounts', [AccountsController::class, 'create']);
+    Route::get('/accounts/{id}', [AccountsController::class, 'view']);
+    Route::put('/accounts/{id}', [AccountsController::class, 'update']);
+    Route::delete('/accounts/{id}', [AccountsController::class, 'delete']);
+});

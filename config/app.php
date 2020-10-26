@@ -226,6 +226,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Consumer' => \LaravelCode\AMPQ\Facades\Consumer::class,
+        'Publisher' => \LaravelCode\AMPQ\Facades\Publisher::class,
 
     ],
 

@@ -8,16 +8,18 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "fideloper/proxy": "^4.2",
         "friendsofphp/php-cs-fixer": "^2.16",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.1",
+        "laravel-code/ampq": "dev-main",
         "laravel-code/event-sourcing": "dev-main",
         "laravel-code/middleware": "dev-master",
         "laravel/framework": "^8.0",
         "laravel/passport": "^10.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "php-amqplib/php-amqplib": "^2.12"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
@@ -77,6 +79,10 @@
         {
             "type": "vcs",
             "url": "git@github.com:laravel-code/middleware.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:laravel-code/ampq.git"
         }
     ]
 }

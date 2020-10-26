@@ -14355,7 +14355,112 @@
      
 }
 
-        namespace Facade\Ignition\Facades { 
+        namespace LaravelCode\AMPQ\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Consumer {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function declare($exchange, $queue, $exchangeType = 'fanout', $exclusive = false, $passive = false, $durable = true, $autoDelete = false)
+        {
+                        /** @var \LaravelCode\AMPQ\Consumer $instance */
+                        return $instance->declare($exchange, $queue, $exchangeType, $exclusive, $passive, $durable, $autoDelete);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function read($exchange, $queue, $callback)
+        {
+                        /** @var \LaravelCode\AMPQ\Consumer $instance */
+                        return $instance->read($exchange, $queue, $callback);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Publisher {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function declare($exchange, $exchangeType = 'fanout', $passive = false, $durable = true, $autoDelete = false)
+        {
+                        /** @var \LaravelCode\AMPQ\Publisher $instance */
+                        return $instance->declare($exchange, $exchangeType, $passive, $durable, $autoDelete);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function write($exchange, $payload = [])
+        {
+                        /** @var \LaravelCode\AMPQ\Publisher $instance */
+                        return $instance->write($exchange, $payload);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Connector {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getConnection()
+        {
+                        /** @var \LaravelCode\AMPQ\Connector $instance */
+                        return $instance->getConnection();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getChannel()
+        {
+                        /** @var \LaravelCode\AMPQ\Connector $instance */
+                        return $instance->getChannel();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getConsumer()
+        {
+                        /** @var \LaravelCode\AMPQ\Connector $instance */
+                        return $instance->getConsumer();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function close()
+        {
+                        /** @var \LaravelCode\AMPQ\Connector $instance */
+                        return $instance->close();
+        }
+         
+    }
+     
+}
+
+    namespace Facade\Ignition\Facades { 
             /**
      * Class Flare.
      *
@@ -17876,7 +17981,10 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class Consumer extends \LaravelCode\AMPQ\Facades\Consumer {}
+            class Publisher extends \LaravelCode\AMPQ\Facades\Publisher {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
+            class Connector extends \LaravelCode\AMPQ\Facades\Connector {}
             class OAuthClient extends \LaravelCode\Middleware\Facades\OAuthClient {}
             class HttpClient extends \LaravelCode\Middleware\Facades\HttpClient {}
      
