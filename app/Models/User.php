@@ -11,7 +11,7 @@ use Laravel\Passport\HasApiTokens;
 use LaravelCode\EventSourcing\Models\SearchBehaviourTrait;
 
 /**
- * App\Models\User
+ * App\Models\User.
  *
  * @property int $id
  * @property string $name
@@ -50,7 +50,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SearchBehaviourTrait;
 
     protected $include = [
-        'roles'
+        'roles',
     ];
 
     /**

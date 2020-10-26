@@ -24,7 +24,6 @@ class UserEmailWasChanged extends ApplyEvent implements ApplyEventInterface
         return $this->email;
     }
 
-
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

@@ -2,7 +2,6 @@
 
 namespace App\Listeners\User;
 
-
 use App\Events\Apply\User\UserEmailWasChanged;
 use App\Events\Apply\User\UserNameWasChanged;
 use App\Events\Apply\User\UserPasswordWasChanged;
@@ -15,13 +14,12 @@ class UserUpdateListener
     use ApplyListener;
 
     /**
-     * Set if the program is unable to guess the model class
+     * Set if the program is unable to guess the model class.
      */
     public string $model = User::class;
 
     public function handleCommand(UserUpdate $event)
     {
-
         if ($this->entity->name !== $event->getName()) {
             $this->event(new UserNameWasChanged($this->entity->id, $event->getName()));
         }

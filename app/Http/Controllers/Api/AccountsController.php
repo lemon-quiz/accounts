@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 
 class AccountsController extends Controller
 {
-
     public function index(Request $request)
     {
         return User::paginatedResources($request, function () {
@@ -40,5 +39,4 @@ class AccountsController extends Controller
     {
         UserDelete::handleEvent($id, $request->all());
     }
-
 }

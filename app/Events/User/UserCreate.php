@@ -68,7 +68,6 @@ class UserCreate implements EventInterface
         return $this->roles;
     }
 
-
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

@@ -11,8 +11,7 @@ use LaravelCode\EventSourcing\Contracts\EventInterface;
 use LaravelCode\EventSourcing\Listeners\ApplyListener;
 
 /**
- * Class Create
- * @package App\Listeners\User
+ * Class Create.
  * @property User $entity
  */
 class UserCreateListener
@@ -20,7 +19,7 @@ class UserCreateListener
     use ApplyListener;
 
     /**
-     * Set if the program is unable to guess the model class
+     * Set if the program is unable to guess the model class.
      */
     public string $model = User::class;
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use LaravelCode\EventSourcing\Models\SearchBehaviourTrait;
 
 /**
- * App\Models\Role
+ * App\Models\Role.
  *
  * @property int $id
  * @property string $name
@@ -38,7 +38,8 @@ class Role extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsToMany(User::class);
     }
 }

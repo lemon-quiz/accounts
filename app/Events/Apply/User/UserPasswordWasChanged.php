@@ -24,7 +24,6 @@ class UserPasswordWasChanged extends ApplyEvent implements ApplyEventInterface
         return $this->password;
     }
 
-
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

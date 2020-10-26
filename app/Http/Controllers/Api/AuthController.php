@@ -13,10 +13,8 @@ use Session;
 
 class AuthController extends Controller
 {
-
     public function register(Register $request)
     {
-
         $user = new User([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
@@ -24,9 +22,9 @@ class AuthController extends Controller
 
         ]);
         $user->save();
+
         return response()->json(['ok'])->send();
     }
-
 
     public function login(Login $request)
     {
@@ -43,7 +41,7 @@ class AuthController extends Controller
             ],
         ]);
 
-        return json_decode((string)$response->getBody(), true);
+        return json_decode((string) $response->getBody(), true);
     }
 
     public function profile(Request $request)
@@ -55,6 +53,5 @@ class AuthController extends Controller
         return response()->json($user)
             ->header('X_OAUTH_CLIENT_ID', $request->get('X_OAUTH_CLIENT_ID'))
             ->header('X_OAUTH_USER_ID', $request->get('X_OAUTH_USER_ID'));
-
     }
 }
