@@ -57,9 +57,8 @@ class User extends Authenticatable
         'name',
         'id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
-
 
     /**
      * The attributes that are mass assignable.
@@ -111,7 +110,7 @@ class User extends Authenticatable
 
                     return $query->whereIn('id', $roles);
                 });
-            }
+            },
         ];
     }
 

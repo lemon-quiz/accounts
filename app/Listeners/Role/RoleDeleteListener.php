@@ -12,7 +12,7 @@ class RoleDeleteListener
     use ApplyListener;
 
     /**
-     * Set if the program is unable to guess the model class
+     * Set if the program is unable to guess the model class.
      */
     public $model = Role::class;
 

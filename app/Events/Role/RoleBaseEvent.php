@@ -64,6 +64,7 @@ trait RoleBaseEvent
     {
         return $this->initEmployee;
     }
+
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

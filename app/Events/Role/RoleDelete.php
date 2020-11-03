@@ -32,7 +32,7 @@ class RoleDelete implements EventInterface
     public function toPayload(): array
     {
         return [
-            'id' => $this->getId()
+            'id' => $this->getId(),
         ];
     }
 }

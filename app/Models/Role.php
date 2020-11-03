@@ -43,7 +43,7 @@ class Role extends Model
         'private',
         'init_employee',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
@@ -56,11 +56,11 @@ class Role extends Model
         return [
             'id',
             'name' => function (Builder $query, $value) {
-                return $query->where('name', 'like', '%' . $value . '%');
+                return $query->where('name', 'like', '%'.$value.'%');
             },
             'grouped' => function (Builder $query, $value) {
-                return $query->where('grouped', 'like', '%' . $value . '%');
-            }
+                return $query->where('grouped', 'like', '%'.$value.'%');
+            },
         ];
     }
 
@@ -71,5 +71,4 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
 }

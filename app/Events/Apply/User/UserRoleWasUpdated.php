@@ -73,7 +73,6 @@ class UserRoleWasUpdated extends ApplyEvent implements ApplyEventInterface
         return $this->delete;
     }
 
-
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

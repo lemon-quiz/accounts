@@ -44,8 +44,9 @@ class RolesController extends Controller
         return RoleDelete::handleEvent($id, $request->all());
     }
 
-    public function events(Request $request, $id) {
-        return Event::paginatedResources($request, function(Builder $query) use($id) {
+    public function events(Request $request, $id)
+    {
+        return Event::paginatedResources($request, function (Builder $query) use ($id) {
             $query->where('resource_id', $id)
                 ->where('model', Role::class);
         });

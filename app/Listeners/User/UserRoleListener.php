@@ -9,8 +9,7 @@ use App\Models\User;
 use LaravelCode\EventSourcing\Listeners\ApplyListener;
 
 /**
- * Class UserRoleListener
- * @package App\Listeners\User
+ * Class UserRoleListener.
  *
  * @property User $entity
  */
@@ -19,7 +18,7 @@ class UserRoleListener
     use ApplyListener;
 
     /**
-     * Set if the program is unable to guess the model class
+     * Set if the program is unable to guess the model class.
      */
     public $model = User::class;
 
@@ -31,8 +30,9 @@ class UserRoleListener
      */
     public function handleCommand(Events\User\UserRole $event)
     {
-        if (!$event->isRead() && !$event->isWrite() && !$event->isUpdate() && !$event->isDelete()) {
+        if (! $event->isRead() && ! $event->isWrite() && ! $event->isUpdate() && ! $event->isDelete()) {
             $this->event(new Events\Apply\User\UserRoleWasDeleted($event->getId(), $event->getRoleId()));
+
             return;
         }
 

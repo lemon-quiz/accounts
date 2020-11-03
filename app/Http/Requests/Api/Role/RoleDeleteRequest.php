@@ -21,7 +21,6 @@ class RoleDeleteRequest extends FormRequest
         return $this->hasAccess($request->user(), 'accounts-role', $request->method());
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *

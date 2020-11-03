@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class UserRoleRequest extends FormRequest
 {
     use RequestAuthTrait;
-
     use RequestAuthTrait;
 
     /**

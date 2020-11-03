@@ -82,7 +82,6 @@ class UserRole implements EventInterface
         return $this->delete;
     }
 
-
     public static function fromPayload($id, Collection $collection)
     {
         return new self(

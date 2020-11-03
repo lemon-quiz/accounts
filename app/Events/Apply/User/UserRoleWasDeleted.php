@@ -41,7 +41,7 @@ class UserRoleWasDeleted extends ApplyEvent implements ApplyEventInterface
     {
         return [
             'id' => $this->getId(),
-            'role_id' => $this->getRoleId()
+            'role_id' => $this->getRoleId(),
         ];
     }
 }

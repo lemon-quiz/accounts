@@ -10,9 +10,10 @@ use LaravelCode\EventSourcing\Models\Event;
 
 class EventsController extends Controller
 {
-    public function index(Request $request) {
-        return Event::paginatedResources($request, function(Builder $query) {
-           // This should check the AuthorID
+    public function index(Request $request)
+    {
+        return Event::paginatedResources($request, function (Builder $query) {
+            // This should check the AuthorID
         });
     }
 }

@@ -51,11 +51,11 @@ class AccountsController extends Controller
         return UserRole::handleEvent($id, $request->all());
     }
 
-    public function events(Request $request, $id) {
-        return Event::paginatedResources($request, function(Builder $query) use($id) {
+    public function events(Request $request, $id)
+    {
+        return Event::paginatedResources($request, function (Builder $query) use ($id) {
             $query->where('id', $id)
                 ->where('model', User::class);
         });
     }
-
 }
