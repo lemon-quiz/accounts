@@ -6,29 +6,34 @@ use Illuminate\Support\Collection;
 use LaravelCode\EventSourcing\Contracts\ApplyEventInterface;
 use LaravelCode\EventSourcing\Event\Apply\ApplyEvent;
 
-class UserNameWasChanged extends ApplyEvent implements ApplyEventInterface
+class UserRoleWasDeleted extends ApplyEvent implements ApplyEventInterface
 {
-    private string $name;
+    private string $role_id;
 
-    public function __construct($id, $role_id)
+    /**
+     * UserRoleWasDeleted constructor.
+     * @param $id
+     * @param string $role_id
+     */
+    public function __construct($id, string $role_id)
     {
         parent::__construct($id);
-        $this->name = $role_id;
+        $this->role_id = $role_id;
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getRoleId(): string
     {
-        return $this->name;
+        return $this->role_id;
     }
 
     public static function fromPayload($id, Collection $collection)
     {
         return new self(
             $id,
-            $collection->get('name')
+            $collection->get('role_id')
         );
     }
 
@@ -36,7 +41,7 @@ class UserNameWasChanged extends ApplyEvent implements ApplyEventInterface
     {
         return [
             'id' => $this->getId(),
-            'name' => $this->getName(),
+            'role_id' => $this->getRoleId()
         ];
     }
 }

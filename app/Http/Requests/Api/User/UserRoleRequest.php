@@ -6,8 +6,10 @@ use App\Lib\Auth\RequestAuthTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class UserDeleteRequest extends FormRequest
+class UserRoleRequest extends FormRequest
 {
+    use RequestAuthTrait;
+
     use RequestAuthTrait;
 
     /**
@@ -18,7 +20,7 @@ class UserDeleteRequest extends FormRequest
      */
     public function authorize(Request $request)
     {
-        return $this->hasAccess($request->user(), 'accounts-user', $request->method());
+        return $this->hasAccess($request->user(), 'accounts-user-role', $request->method());
     }
 
     /**
@@ -29,7 +31,11 @@ class UserDeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'role_id' => 'required',
+            'read' => 'boolean',
+            'write' => 'boolean',
+            'update' => 'boolean',
+            'delete' => 'boolean',
         ];
     }
 }

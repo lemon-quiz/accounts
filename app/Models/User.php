@@ -53,6 +53,14 @@ class User extends Authenticatable
         'roles',
     ];
 
+    protected $orderFields = [
+        'name',
+        'id',
+        'created_at',
+        'updated_at'
+    ];
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -91,6 +99,19 @@ class User extends Authenticatable
                 return $query->where('name', 'like', "%{$value}%")
                     ->orWhere('email', 'like', "%{$value}%");
             },
+            'name' => function (Builder $query, $value) {
+                return $query->where('name', 'like', "%{$value}%");
+            },
+            'email' => function (Builder $query, $value) {
+                return $query->where('email', 'like', "%{$value}%");
+            },
+            'roles' => function (Builder $query, $value) {
+                return $query->whereHas('roles', function (Builder $query) use ($value) {
+                    $roles = explode(',', $value);
+
+                    return $query->whereIn('id', $roles);
+                });
+            }
         ];
     }
 

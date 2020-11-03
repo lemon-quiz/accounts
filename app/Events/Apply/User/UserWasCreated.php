@@ -15,15 +15,15 @@ class UserWasCreated extends ApplyEvent implements ApplyEventInterface
 
     /**
      * Create constructor.
-     * @param string $name
+     * @param string $role_id
      * @param string $password
      * @param string $email
      * @param array $roles
      */
-    public function __construct($id, string $name, string $password, string $email, array $roles = [])
+    public function __construct($id, string $role_id, string $password, string $email, array $roles = [])
     {
         parent::__construct($id);
-        $this->name = $name;
+        $this->name = $role_id;
         $this->password = $password;
         $this->email = $email;
         $this->roles = $roles;

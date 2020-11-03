@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Listeners\Role\RoleCreateListener;
+use App\Listeners\Role\RoleDeleteListener;
+use App\Listeners\Role\RoleUpdateListener;
 use App\Listeners\User\UserCreateListener;
 use App\Listeners\User\UserDeleteListener;
+use App\Listeners\User\UserRoleListener;
 use App\Listeners\User\UserUpdateListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -26,6 +30,11 @@ class EventServiceProvider extends ServiceProvider
         UserCreateListener::class,
         UserUpdateListener::class,
         UserDeleteListener::class,
+        UserRoleListener::class,
+
+        RoleCreateListener::class,
+        RoleUpdateListener::class,
+        RoleDeleteListener::class,
     ];
 
     /**

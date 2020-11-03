@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use LaravelCode\EventSourcing\Models\SearchBehaviourTrait;
@@ -35,6 +36,34 @@ class Role extends Model
 {
     use HasFactory, SearchBehaviourTrait;
 
+    protected $orderFields = [
+        'name',
+        'grouped',
+        'id',
+        'private',
+        'init_employee',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $casts = [
+        'private' => 'boolean',
+        'init_employee' => 'boolean',
+    ];
+
+    public function search()
+    {
+        return [
+            'id',
+            'name' => function (Builder $query, $value) {
+                return $query->where('name', 'like', '%' . $value . '%');
+            },
+            'grouped' => function (Builder $query, $value) {
+                return $query->where('grouped', 'like', '%' . $value . '%');
+            }
+        ];
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -42,4 +71,5 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
 }

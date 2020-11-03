@@ -4,13 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\User\UserCreate;
 use App\Events\User\UserDelete;
+use App\Events\User\UserRole;
 use App\Events\User\UserUpdate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\UserCreateRequest;
 use App\Http\Requests\Api\User\UserDeleteRequest;
+use App\Http\Requests\Api\User\UserRoleRequest;
 use App\Http\Requests\Api\User\UserUpdateRequest;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use LaravelCode\EventSourcing\Models\Command;
+use LaravelCode\EventSourcing\Models\Event;
 
 class AccountsController extends Controller
 {
@@ -22,21 +28,34 @@ class AccountsController extends Controller
 
     public function view(Request $request, $id)
     {
-        return User::viewResource($id, $request);
+        return User::resource($id, $request);
     }
 
     public function create(UserCreateRequest $request)
     {
-        UserCreate::handleEvent(null, $request->all());
+        return UserCreate::handleEvent(null, $request->all());
     }
 
     public function update(UserUpdateRequest $request, $id)
     {
-        UserUpdate::handleEvent($id, $request->all());
+        return UserUpdate::handleEvent($id, $request->all());
     }
 
     public function delete(UserDeleteRequest $request, $id)
     {
-        UserDelete::handleEvent($id, $request->all());
+        return UserDelete::handleEvent($id, $request->all());
     }
+
+    public function role(UserRoleRequest $request, $id)
+    {
+        return UserRole::handleEvent($id, $request->all());
+    }
+
+    public function events(Request $request, $id) {
+        return Event::paginatedResources($request, function(Builder $query) use($id) {
+            $query->where('id', $id)
+                ->where('model', User::class);
+        });
+    }
+
 }

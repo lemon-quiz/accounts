@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api\Role;
 
 use App\Lib\Auth\RequestAuthTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class UserDeleteRequest extends FormRequest
+class RoleDeleteRequest extends FormRequest
 {
     use RequestAuthTrait;
 
@@ -18,8 +18,9 @@ class UserDeleteRequest extends FormRequest
      */
     public function authorize(Request $request)
     {
-        return $this->hasAccess($request->user(), 'accounts-user', $request->method());
+        return $this->hasAccess($request->user(), 'accounts-role', $request->method());
     }
+
 
     /**
      * Get the validation rules that apply to the request.

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserRevisionNumber extends Migration
+class RolesGroup extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UserRevisionNumber extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('revision_number')->default(false);
+        Schema::table('roles', function (Blueprint $table) {
+            $table->string('grouped')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class UserRevisionNumber extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('revision_number');
+        Schema::table('roles', function (Blueprint $table) {
+            $table->dropColumn('grouped');
         });
     }
 }
