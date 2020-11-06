@@ -44,6 +44,8 @@ use LaravelCode\EventSourcing\Models\SearchBehaviourTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $revision_number
+ * @method static Builder|User whereRevisionNumber($value)
  */
 class User extends Authenticatable
 {

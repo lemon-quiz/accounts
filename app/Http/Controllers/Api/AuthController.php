@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Login;
 use App\Http\Requests\Register;
+use App\Models\OauthClient;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -48,9 +49,17 @@ class AuthController extends Controller
     {
         /** @var User $user */
         $user = $request->user();
-        $user->load('roles');
+        if ($user) {
+            $user->load('roles');
 
-        return response()->json($user)
+            return response()->json($user)
+                ->header('X_OAUTH_CLIENT_ID', $request->get('X_OAUTH_CLIENT_ID'))
+                ->header('X_OAUTH_USER_ID', $request->get('X_OAUTH_USER_ID'));
+        }
+
+        $client = OauthClient::findOrFail($request->get('X_OAUTH_CLIENT_ID'))->makeHidden(['secret']);
+
+        return response()->json($client)
             ->header('X_OAUTH_CLIENT_ID', $request->get('X_OAUTH_CLIENT_ID'))
             ->header('X_OAUTH_USER_ID', $request->get('X_OAUTH_USER_ID'));
     }

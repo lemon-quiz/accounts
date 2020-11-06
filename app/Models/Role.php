@@ -31,6 +31,10 @@ use LaravelCode\EventSourcing\Models\SearchBehaviourTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|Role wherePrivate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $revision_number
+ * @property string $grouped
+ * @method static Builder|Role whereGrouped($value)
+ * @method static Builder|Role whereRevisionNumber($value)
  */
 class Role extends Model
 {
