@@ -1,9 +1,5 @@
 FROM php:7.4-fpm
 
-#Get the user_id and group_id 'id -u' and 'id -g'
-RUN addgroup --gid 1000 user
-RUN adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
-
 RUN apt-get update && apt-get install supervisor git zip -y
 RUN docker-php-ext-install pdo pdo_mysql sockets
 RUN pecl install -o -f redis \
@@ -12,11 +8,16 @@ RUN pecl install -o -f redis \
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/sbin/composer
-COPY ./supervisor/conf.d /etc/supervisor/conf.d
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 
-# USER user
-# service supervisor start
-#RUN supervisorctl reread \
-#  && supervisorctl update # \
- # && supervisorctl start laravel-queue:*
+ARG USER_ID
+ARG GROUP_ID
+
+RUN addgroup --gid $GROUP_ID user
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+RUN adduser user root
+RUN chmod g+w -R /var/log/supervisor
+
+COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./supervisor/conf.d /etc/supervisor/conf.d
+USER user
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
