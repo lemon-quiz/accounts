@@ -36,3 +36,31 @@ Route::group(['middleware' => 'service'], function () {
     Route::get('events', [EventsController::class, 'index']);
     Route::resource('/roles', RolesController::class);
 });
+
+Route::group([
+    'prefix' => 'oauth',
+    'namespace' => '\App\Http\Controllers\Api\OAuth',
+    'middleware' => ['throttle'], ],
+    function ($router) {
+        Route::get('/authorize', [
+            'uses' => 'AuthorizationController@authorize',
+            'as' => 'passport.authorizations.authorize',
+            'middleware' => ['service'],
+        ]);
+
+        Route::post('/authorize', [
+            'uses' => 'ApproveAuthorizationController@approve',
+            'as' => 'passport.authorizations.approve',
+            'middleware' => ['service'],
+        ]);
+
+        Route::post('/token', [
+            'uses' => 'AccessTokenController@issueToken',
+            'as' => 'passport.token',
+        ]);
+//
+//    Route::delete('/authorize', [
+//        'uses' => 'DenyAuthorizationController@deny',
+//        'as' => 'passport.authorizations.deny',
+//    ]);
+    });

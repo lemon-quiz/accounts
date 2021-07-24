@@ -17,7 +17,9 @@ RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 RUN adduser user root
 RUN chmod g+w -R /var/log/supervisor
 
+COPY ./conf /usr/local/etc/
 COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ./supervisor/conf.d /etc/supervisor/conf.d
 USER user
+
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]

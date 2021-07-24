@@ -24,13 +24,12 @@ class AuthController extends Controller
         ]);
         $user->save();
 
-        return response()->json(['ok'])->send();
+        return ['ok'];
     }
 
     public function login(Login $request)
     {
         $http = new Client();
-
         $response = $http->post('http://web/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
@@ -38,7 +37,7 @@ class AuthController extends Controller
                 'client_secret' => 'MCYCtcU85efcRJZgu72JEvnwk6hSTvbFHizpf7Un',
                 'username' => $request->get('username'),
                 'password' => $request->get('password'),
-                'scope' => '',
+                'scope' => 'profile cms',
             ],
         ]);
 
@@ -49,6 +48,7 @@ class AuthController extends Controller
     {
         /** @var User $user */
         $user = $request->user();
+
         if ($user) {
             $user->load('roles');
 

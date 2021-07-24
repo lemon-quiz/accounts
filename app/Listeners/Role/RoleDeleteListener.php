@@ -14,7 +14,7 @@ class RoleDeleteListener
     /**
      * Set if the program is unable to guess the model class.
      */
-    public $model = Role::class;
+    public string $model = Role::class;
 
     /**
      * Handle the event.

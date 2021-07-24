@@ -33,5 +33,16 @@ class AuthServiceProvider extends ServiceProvider
         Passport::refreshTokensExpireIn(now()->addDays(30));
 
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+
+        Passport::enableImplicitGrant();
+
+        Passport::tokensCan([
+            'profile' => 'Request Profile',
+            'check-status' => 'Check order status',
+            'cms' => 'Cms service',
+            'oksel' => 'Smelly',
+        ]);
+
+        Passport::setDefaultScope(['profile']);
     }
 }
